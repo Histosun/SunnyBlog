@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SunnyBlog.Domain;
+using Nest;
 using SunnyBlog.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +29,7 @@ builder.Services.AddCors(options =>
                       });
 });
 ModuleInitializer.Initialize(builder.Services);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

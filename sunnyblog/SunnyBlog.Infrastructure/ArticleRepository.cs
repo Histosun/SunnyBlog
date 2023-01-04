@@ -16,7 +16,7 @@ namespace SunnyBlog.Infrastructure
 
         public TResult[] GetHotArticles<TResult>(Expression<Func<Article, TResult>> selector)
         {
-            return Articles.OrderByDescending(x => x.ViewCount).Where(x => x.Status == null ? false : x.Status =='0').Take(10).Select(selector).ToArray();
+            return Articles.OrderByDescending(x => x.ViewCount).Where(x => x.Status == 1).Take(10).Select(selector).ToArray();
         }
 
         public Article GetById(int id)
@@ -24,14 +24,14 @@ namespace SunnyBlog.Infrastructure
             return Articles.Where(x => x.Id == id).First();
         }
 
-        public IEnumerable<TResult> GetHotArticles<TResult>()
+        public TResult[] GetArticleList<TResult>(int pageNum, Expression<Func<Article, TResult>> selector)
         {
-            throw new NotImplementedException();
+            return Articles.Where(x => x.Status == 1).Skip(pageNum*10).Take(10).Select(selector).ToArray();
         }
 
-        public TResult[] GetArticleList<TResult>(Expression<Func<Article, TResult>> selector)
+        public TResult[] GetArticleListByCategory<TResult>(int pageNum, long categoryId, Expression<Func<Article, TResult>> selector)
         {
-            throw new NotImplementedException();
+            return Articles.Where(x => x.Status == 1 && x.CategoryId == categoryId).Skip(pageNum * 10).Take(10).Select(selector).ToArray();
         }
     }
 }

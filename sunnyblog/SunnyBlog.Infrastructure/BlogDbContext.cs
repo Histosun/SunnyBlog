@@ -14,7 +14,9 @@ namespace SunnyBlog.Infrastructure
         {
         }
 
-        public DbSet<Article> Articles { get; set; } = null!;
+        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,21 +30,20 @@ namespace SunnyBlog.Infrastructure
 
             modelBuilder.Entity<Article>(entity =>
             {
-                entity.ToTable("sg_article");
+                entity.ToTable("article");
 
-                entity.HasComment("文章表");
+                entity.HasComment("article table");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CategoryId)
-                    .HasColumnName("category_id")
-                    .HasComment("所属分类id");
+                    .HasColumnName("category_id");
 
                 entity.Property(e => e.Content)
-                    .HasColumnName("content")
-                    .HasComment("文章内容");
+                    .HasColumnName("content");
 
-                entity.Property(e => e.CreateBy).HasColumnName("create_by");
+                entity.Property(e => e.CreateBy)
+                    .HasColumnName("create_by");
 
                 entity.Property(e => e.CreateTime)
                     .HasColumnType("datetime")
@@ -51,33 +52,31 @@ namespace SunnyBlog.Infrastructure
                 entity.Property(e => e.DelFlag)
                     .HasColumnName("del_flag")
                     .HasDefaultValueSql("'0'")
-                    .HasComment("删除标志（0代表未删除，1代表已删除）");
+                    .HasComment("delete flag(0 not deleted，1 deleted)");
 
                 entity.Property(e => e.IsComment)
                     .HasMaxLength(1)
                     .HasColumnName("is_comment")
                     .HasDefaultValueSql("'1'")
-                    .IsFixedLength()
-                    .HasComment("是否允许评论 1是，0否");
+                    .IsRequired()
+                    .HasComment("Allow comment");
 
                 entity.Property(e => e.IsTop)
                     .HasMaxLength(1)
                     .HasColumnName("is_top")
-                    .HasDefaultValueSql("'0'")
-                    .IsFixedLength()
-                    .HasComment("是否置顶（0否，1是）");
+                    .HasComment("is top");
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(1)
                     .HasColumnName("status")
                     .HasDefaultValueSql("'1'")
-                    .IsFixedLength()
-                    .HasComment("状态（0已发布，1草稿）");
+                    .IsRequired(true)
+                    .HasComment("status (true: published, false: draft)");
 
                 entity.Property(e => e.Summary)
                     .HasMaxLength(1024)
                     .HasColumnName("summary")
-                    .HasComment("文章摘要");
+                    .HasComment("article summary");
 
                 entity.Property(e => e.Thumbnail)
                     .HasMaxLength(256)
@@ -87,7 +86,8 @@ namespace SunnyBlog.Infrastructure
                 entity.Property(e => e.Title)
                     .HasMaxLength(256)
                     .HasColumnName("title")
-                    .HasComment("标题");
+                    .HasComment("标题")
+                    .IsRequired(true);
 
                 entity.Property(e => e.UpdateBy).HasColumnName("update_by");
 
@@ -98,7 +98,28 @@ namespace SunnyBlog.Infrastructure
                 entity.Property(e => e.ViewCount)
                     .HasColumnName("view_count")
                     .HasDefaultValueSql("'0'")
-                    .HasComment("访问量");
+                    .IsRequired(true);
+            });
+
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.ToTable("category");
+
+                entity.HasComment("article table");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(128)
+                    .IsRequired(true);
+
+                entity.Property(e => e.Pid)
+                    .HasColumnName("pid");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(512);
             });
 
             OnModelCreatingPartial(modelBuilder);

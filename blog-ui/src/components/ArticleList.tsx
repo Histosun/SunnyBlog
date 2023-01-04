@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import ArticleCard from './ArticleCard'
-import hotArticleList from '../api/article';
+import {getArticleList} from '../api/article';
 
 const ArticleList: React.FC = () => {
-  const [hotArticles, setHotArticless] = useState([]);
+  const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
-    if(hotArticles.length != 0) return;
+    if(articleList.length != 0) return;
 
-    hotArticleList()
+    getArticleList(0)
     .then(response => {
-      setHotArticless(response.data);
+      setArticleList(response.data);
     })
     .catch(reason => {
       alert(reason)
@@ -19,7 +19,7 @@ const ArticleList: React.FC = () => {
 
   return (
     <div>
-      {hotArticles.map(it => <ArticleCard tag={'Java'} {...it}></ArticleCard>)}
+      {articleList.map(it => <ArticleCard tag={'Java'} {...it}></ArticleCard>)}
     </div>
   );
 }
