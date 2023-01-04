@@ -3,21 +3,23 @@ import { Card, Badge } from 'antd';
 
 const {Meta} = Card;
 
-interface ArticleCardProps {
+export interface ArticleCardProps {
+    id: number;
     title: string;
-    tag: string;
-    imgUrl?: string;
-    description?: string;
+    summary: string;
+    viewCount: number;
+    created?: Date;
+    categoryName?: string;
 }
 
-const ArticleCard: React.FC<ArticleCardProps> = ({title, tag, imgUrl, description}: ArticleCardProps) => {
+const ArticleCard: React.FC<ArticleCardProps> = ({id, title, summary, created, categoryName}: ArticleCardProps) => {
     const titleStyle: React.CSSProperties = { textAlign: "center" };
     const mainStyle: React.CSSProperties = { marginBottom: 30 };
 
     return (
-        <Badge.Ribbon text={tag} placement='start' >
+        <Badge.Ribbon text={categoryName} placement='start' >
             <Card title={title} hoverable headStyle={titleStyle} style={mainStyle}>
-                <Meta description={description} />
+                <Meta description={summary} />
             </Card>
         </Badge.Ribbon>
     );

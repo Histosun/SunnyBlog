@@ -40,7 +40,7 @@ namespace SunnyBlog.WebAPI.Controllers
                 result = CategoryRepository.GetById((long)Id);
                 if (result == null)
                     return null;
-                MemoryCache.Set($"Category.ID.${Id}", result, new DateTime(100000L));
+                MemoryCache.Set($"Category.ID.${Id}", result, TimeSpan.FromDays(7));
                 return result.Name;
             };
             articleList.All(it =>

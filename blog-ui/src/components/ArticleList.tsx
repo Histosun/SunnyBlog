@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import ArticleCard from './ArticleCard'
+import ArticleCard, {ArticleCardProps} from './ArticleCard'
 import {getArticleList} from '../api/article';
 
 const ArticleList: React.FC = () => {
-  const [articleList, setArticleList] = useState([]);
+  const [articleList, setArticleList] = useState([] as ArticleCardProps[]);
 
   useEffect(() => {
     if(articleList.length != 0) return;
@@ -19,7 +19,7 @@ const ArticleList: React.FC = () => {
 
   return (
     <div>
-      {articleList.map(it => <ArticleCard tag={'Java'} {...it}></ArticleCard>)}
+      {articleList.map(it => <ArticleCard {...it}></ArticleCard>)}
     </div>
   );
 }
