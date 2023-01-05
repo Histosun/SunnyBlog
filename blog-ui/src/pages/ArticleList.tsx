@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ArticleCard, {ArticleCardProps} from './ArticleCard'
+import ArticleCard, {ArticleCardProps} from '../components/ArticleCard'
 import {getArticleList} from '../api/article';
 
 const ArticleList: React.FC = () => {

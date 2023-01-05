@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Col, Row, theme } from 'antd';
-import ArticleList from '../components/ArticleList';
+import ArticleList from './ArticleList';
 
 const HomeContent: React.FC = () => {
   const {
