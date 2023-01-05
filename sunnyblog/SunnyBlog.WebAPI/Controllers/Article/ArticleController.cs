@@ -30,19 +30,6 @@ namespace SunnyBlog.WebAPI.Controllers
         public ActionResult<ArticleListItemVM[]> GetArticleList([FromQuery]int pageNum)
         {
             var articleList = ArticleRepository.GetArticleList(pageNum, e => new ArticleListItemVM(e.Id, e.Title, e.Summary, e.ViewCount, e.CategoryId, e.CreateTime));
-            Func<long?, string?> GetCategoryNameById = Id =>
-            {
-                if(Id == null)
-                    return null;
-                Category result;
-                if (MemoryCache.TryGetValue($"Category.ID.${Id}", out result))
-                    return result.Name;
-                result = CategoryRepository.GetById((long)Id);
-                if (result == null)
-                    return null;
-                MemoryCache.Set($"Category.ID.${Id}", result, TimeSpan.FromDays(7));
-                return result.Name;
-            };
             articleList.All(it =>
             {
                 it.CategoryName = GetCategoryNameById(it.CategoryId);
@@ -54,9 +41,23 @@ namespace SunnyBlog.WebAPI.Controllers
         [HttpGet]
         public ActionResult<ArticleListItemVM[]>? GetArticleListByCategory([FromQuery] int pageNum, [FromQuery] long categoryId)
         {
-            Category category = MemoryCache.GetOrCreate($"Category.ID.${categoryId}", e => CategoryRepository.GetById(categoryId));
-            if(category == null) return null;
-            return ArticleRepository.GetArticleListByCategory(pageNum, categoryId, e => new ArticleListItemVM(e.Id, e.Title, e.Summary, e.ViewCount, null, e.CreateTime, category.Name)); ;
+            string? categoryName = GetCategoryNameById(categoryId);
+            if(categoryName == null) return null;
+            return ArticleRepository.GetArticleListByCategory(pageNum, categoryId, e => new ArticleListItemVM(e.Id, e.Title, e.Summary, e.ViewCount, null, e.CreateTime, categoryName)); ;
+        }
+
+        private string? GetCategoryNameById(long? Id)
+        {
+            if (Id == null)
+                return null;
+            Category result;
+            if (MemoryCache.TryGetValue($"Category.ID.${Id}", out result))
+                return result.Name;
+            result = CategoryRepository.GetById((long)Id);
+            if (result == null)
+                return null;
+            MemoryCache.Set($"Category.ID.${Id}", result, TimeSpan.FromDays(7));
+            return result.Name;
         }
     }
 }
