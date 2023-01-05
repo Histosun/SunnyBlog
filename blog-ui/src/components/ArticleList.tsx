@@ -19,7 +19,7 @@ const ArticleList: React.FC = () => {
 
   return (
     <div>
-      {articleList.map(it => <ArticleCard {...it}></ArticleCard>)}
+      {articleList.map(it => <ArticleCard key={it.id} {...it}></ArticleCard>)}
     </div>
   );
 }

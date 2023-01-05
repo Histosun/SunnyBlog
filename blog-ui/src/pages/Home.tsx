@@ -3,7 +3,7 @@ import { HomeOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { NavLink } from 'react-router-dom';
-import Home1 from './Home1';
+import HomeContent from './HomeContent';
 
 type MenuItem = Required<MenuProps>['items'][number];
 const { Header, Content, Footer } = Layout;
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
           </Breadcrumb.Item>
         </Breadcrumb>
         <div className="site-layout-content" style={{ background: colorBgContainer }}>
-          <Home1></Home1>
+          <HomeContent/>
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>

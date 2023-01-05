@@ -27,9 +27,10 @@ namespace SunnyBlog.WebAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<ArticleListItemVM[]> GetArticleList([FromQuery]int pageNum)
+        public ActionResult<ArticleListItemVM[]> GetArticleList([FromQuery]int? pageNum)
         {
-            var articleList = ArticleRepository.GetArticleList(pageNum, e => new ArticleListItemVM(e.Id, e.Title, e.Summary, e.ViewCount, e.CategoryId, e.CreateTime));
+            int pageNr = pageNum ?? 1;
+            var articleList = ArticleRepository.GetArticleList(pageNr, e => new ArticleListItemVM(e.Id, e.Title, e.Summary, e.ViewCount, e.CategoryId, e.CreateTime));
             articleList.All(it =>
             {
                 it.CategoryName = GetCategoryNameById(it.CategoryId);
@@ -44,6 +45,13 @@ namespace SunnyBlog.WebAPI.Controllers
             string? categoryName = GetCategoryNameById(categoryId);
             if(categoryName == null) return null;
             return ArticleRepository.GetArticleListByCategory(pageNum, categoryId, e => new ArticleListItemVM(e.Id, e.Title, e.Summary, e.ViewCount, null, e.CreateTime, categoryName)); ;
+        }
+
+        [HttpGet]
+        public ActionResult<ArticleListItemVM>? GetArticleDetail([FromQuery] int articleId)
+        {
+
+            return null;
         }
 
         private string? GetCategoryNameById(long? Id)

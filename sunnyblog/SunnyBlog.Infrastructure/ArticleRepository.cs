@@ -33,5 +33,10 @@ namespace SunnyBlog.Infrastructure
         {
             return Articles.Where(x => x.Status == 1 && x.CategoryId == categoryId).Skip(pageNum * 10).Take(10).Select(selector).ToArray();
         }
+
+        public TResult GetArticleDetail<TResult>(long articleId, Expression<Func<Article, TResult>> selector)
+        {
+            return Articles.Where(x => x.Status == 1 && x.Id == articleId).Select(selector).Single();
+        }
     }
 }
