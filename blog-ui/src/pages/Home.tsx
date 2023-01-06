@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { HomeOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Layout, Menu, theme } from 'antd';
-import routes from '../routes/'
 import { useRoutes } from 'react-router-dom';
+import type { MenuProps } from 'antd';
+import { Layout, theme } from 'antd';
+import routes from '../routes/'
+import HomeMenu from '../components/HomeMenu';
 
 type MenuItem = Required<MenuProps>['items'][number];
 const { Header, Content, Footer } = Layout;
@@ -12,22 +12,12 @@ const Home: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
-  const items: MenuItem[] = [
-    {key: "home", icon: <HomeOutlined/>, label: "Home"},
-    {key: "category", icon: <UnorderedListOutlined/>, label: "Category"},
-  ];
   const elements = useRoutes(routes)
 
   return (
     <Layout className="layout">
       <Header>
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          items={items}
-        />
+        <HomeMenu/>
       </Header>
       <Content style={{ padding: '0 50px' }}>
         {/* <Breadcrumb style={{ margin: '16px 0' }}>
