@@ -19,3 +19,13 @@ export const getArticleList = (pageNum: number)=>{
         }
     })
 }
+
+export const getArticleDetail = (articleId: string)=>{
+    return request({
+        url: `/Article/GetArticleDetail/${articleId}`,
+        method: "get",
+        headers: {
+            isToker: false
+        }
+    })
+}

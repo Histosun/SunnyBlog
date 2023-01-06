@@ -47,11 +47,10 @@ namespace SunnyBlog.WebAPI.Controllers
             return ArticleRepository.GetArticleListByCategory(pageNum, categoryId, e => new ArticleListItemVM(e.Id, e.Title, e.Summary, e.ViewCount, null, e.CreateTime, categoryName)); ;
         }
 
-        [HttpGet]
-        public ActionResult<ArticleListItemVM>? GetArticleDetail([FromQuery] int articleId)
+        [HttpGet("{id}")]
+        public ActionResult<ArticleDetailVM>? GetArticleDetail([FromRoute] long id)
         {
-
-            return null;
+            return ArticleRepository.GetArticleDetail(id, e => new ArticleDetailVM(e.Title, e.Content, e.ViewCount, e.CreateTime));
         }
 
         private string? GetCategoryNameById(long? Id)

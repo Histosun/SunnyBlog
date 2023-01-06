@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ArticleCard, {ArticleCardProps} from '../components/ArticleCard'
-import {getArticleList} from '../api/article';
+import ArticleCard, {ArticleCardProps} from '../../components/ArticleCard'
+import {getArticleList} from '../../api/article';
 
 const ArticleList: React.FC = () => {
   const [articleList, setArticleList] = useState([] as ArticleCardProps[]);

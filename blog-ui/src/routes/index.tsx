@@ -1,14 +1,14 @@
 import { RouteObject } from "react-router-dom";
-import ArticleList from "../pages/ArticleList";
-import ArticleDetail from "../pages/ArticleDetail";
+import ArticleHome from "../pages/article/ArticleHome";
+import ArticleDetail from "../pages/article/ArticleDetail";
 export default [
     {
         path: '/',
-        element: <ArticleList/>
+        element: <ArticleHome/>
     },
     {
         path: '/Home',
-        element: <ArticleList/>
+        element: <ArticleHome/>
     },
     {
         path: '/Article/:id',

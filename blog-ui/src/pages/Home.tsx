@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import { HomeOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu, theme } from 'antd';
-import HomeContent from './HomeContent';
+import routes from '../routes/'
+import { useRoutes } from 'react-router-dom';
 
 type MenuItem = Required<MenuProps>['items'][number];
 const { Header, Content, Footer } = Layout;
@@ -16,6 +17,7 @@ const Home: React.FC = () => {
     {key: "home", icon: <HomeOutlined/>, label: "Home"},
     {key: "category", icon: <UnorderedListOutlined/>, label: "Category"},
   ];
+  const elements = useRoutes(routes)
 
   return (
     <Layout className="layout">
@@ -36,8 +38,8 @@ const Home: React.FC = () => {
             <NavLink to = "/Home/List">List</NavLink>
           </Breadcrumb.Item>
         </Breadcrumb> */}
-        <div className="site-layout-content" style={{ background: colorBgContainer }}>
-          <HomeContent/>
+        <div className="site-layout-content" style={{ background: colorBgContainer, marginTop:20 }}>
+          {elements}
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
