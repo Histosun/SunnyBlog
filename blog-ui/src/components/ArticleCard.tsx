@@ -1,4 +1,5 @@
 import React, { ComponentProps } from 'react';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { Card, Badge } from 'antd';
 import ArticleBottom from './ArticleBottom';
 
@@ -14,10 +15,13 @@ export interface ArticleCardProps {
 }
 
 const ArticleCard: React.FC<ArticleCardProps> = ({id, title, summary, viewCount,created, categoryName}: ArticleCardProps) => {
-
+    const navigate = useNavigate();
+    const navArticleDetail = (id:number) => {
+        navigate(`/Article/${id}`)
+    }
     return (
         <Badge.Ribbon text={categoryName} placement='start' >
-            <Card title={title} hoverable headStyle={titleStyle} style={mainStyle}>
+            <Card title={title} onClick={() => navArticleDetail(id)} hoverable headStyle={titleStyle} style={mainStyle}>
                 <div style={metaStyle}>{summary}</div>
                 <ArticleBottom created={created} viewCount={viewCount}/>
             </Card>

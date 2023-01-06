@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { HomeOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { Layout, Menu, theme } from 'antd';
 import HomeContent from './HomeContent';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -29,14 +28,14 @@ const Home: React.FC = () => {
         />
       </Header>
       <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
+        {/* <Breadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item>
             <NavLink to = "/Home">Home</NavLink>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
             <NavLink to = "/Home/List">List</NavLink>
           </Breadcrumb.Item>
-        </Breadcrumb>
+        </Breadcrumb> */}
         <div className="site-layout-content" style={{ background: colorBgContainer }}>
           <HomeContent/>
         </div>
