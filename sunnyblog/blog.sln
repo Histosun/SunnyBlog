@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SunnyBlog.WebAPI", "SunnyBl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SunnyCommons.Domain", "SunnyCommons.Domain\SunnyCommons.Domain.csproj", "{956B1922-28B2-4AD0-8623-37085A76D370}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SunnyCommons.Auth", "SunnyCommons.Auth\SunnyCommons.Auth.csproj", "{AA4616CF-2A23-4999-9967-6640DBE16DFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{956B1922-28B2-4AD0-8623-37085A76D370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{956B1922-28B2-4AD0-8623-37085A76D370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{956B1922-28B2-4AD0-8623-37085A76D370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4616CF-2A23-4999-9967-6640DBE16DFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA4616CF-2A23-4999-9967-6640DBE16DFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA4616CF-2A23-4999-9967-6640DBE16DFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA4616CF-2A23-4999-9967-6640DBE16DFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{0F295CB1-FB46-4FF7-A369-3C0D562F053B} = {91A69371-E7A2-4EE3-ABA4-753ABCE9849B}
 		{42E3DA7D-9AD0-48B4-9517-41FBE480672A} = {91A69371-E7A2-4EE3-ABA4-753ABCE9849B}
 		{956B1922-28B2-4AD0-8623-37085A76D370} = {F186546E-911F-4AC2-907A-264DBE45E8C1}
+		{AA4616CF-2A23-4999-9967-6640DBE16DFB} = {F186546E-911F-4AC2-907A-264DBE45E8C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3205B3B9-65C8-4685-8EE2-E6A08A2367EC}

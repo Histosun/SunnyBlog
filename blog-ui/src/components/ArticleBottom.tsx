@@ -4,19 +4,17 @@ import { EyeOutlined, CalendarOutlined } from '@ant-design/icons';
 interface ArticleBottomProps {
     created: Date,
     viewCount: number,
-    children: JSX.Element | JSX.Element[],
+    children?: JSX.Element | JSX.Element[],
 }
 
 const ArticleBottom: React.FC<ArticleBottomProps> = (props: ArticleBottomProps) => {
 
     return (
-        <>
-            <div style={Style}>
-                <EyeOutlined/>{props.viewCount}
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <CalendarOutlined/>{props.created}
-            </div>
-        </>
+        <div style={Style}>
+            <EyeOutlined/>{props.viewCount}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <CalendarOutlined/>{props.created}
+        </div>
     );
 }
 

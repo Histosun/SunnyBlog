@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SunnyBlog.Domain;
+using SunnyBlog.Infrastructure.Repositories;
 
 namespace SunnyBlog.Infrastructure
 {

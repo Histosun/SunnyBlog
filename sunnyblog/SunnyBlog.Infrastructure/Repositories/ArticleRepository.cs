@@ -3,11 +3,11 @@ using SunnyBlog.Domain;
 using SunnyBlog.Domain.Entities;
 using System.Linq.Expressions;
 
-namespace SunnyBlog.Infrastructure
+namespace SunnyBlog.Infrastructure.Repositories
 {
     public class ArticleRepository : IArticleRepository
     {
-        DbSet<Article> Articles;
+        private readonly DbSet<Article> Articles;
 
         public ArticleRepository(BlogDbContext blogDbContext)
         {
@@ -26,7 +26,7 @@ namespace SunnyBlog.Infrastructure
 
         public TResult[] GetArticleList<TResult>(int pageNum, Expression<Func<Article, TResult>> selector)
         {
-            return Articles.Where(x => x.Status == 1).Skip(pageNum*10).Take(10).Select(selector).ToArray();
+            return Articles.Where(x => x.Status == 1).Skip(pageNum * 10).Take(10).Select(selector).ToArray();
         }
 
         public TResult[] GetArticleListByCategory<TResult>(int pageNum, long categoryId, Expression<Func<Article, TResult>> selector)

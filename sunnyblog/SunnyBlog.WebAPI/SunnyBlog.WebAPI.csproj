@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SunnyBlog.Infrastructure\SunnyBlog.Infrastructure.csproj" />
+    <ProjectReference Include="..\SunnyCommons.Auth\SunnyCommons.Auth.csproj" />
   </ItemGroup>
 
 </Project>

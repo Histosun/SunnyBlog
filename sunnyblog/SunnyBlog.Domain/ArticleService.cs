@@ -2,8 +2,8 @@
 {
     public class ArticleService
     {
-        IArticleRepository articleRepository;
-        ICategoryRepository categoryRepository;
+        private readonly IArticleRepository articleRepository;
+        private readonly ICategoryRepository categoryRepository;
         public ArticleService(IArticleRepository articleRepository, ICategoryRepository categoryRepository)
         {
             this.articleRepository = articleRepository;

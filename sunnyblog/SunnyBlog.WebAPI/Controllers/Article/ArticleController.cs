@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using SunnyBlog.Domain;
@@ -12,14 +13,12 @@ namespace SunnyBlog.WebAPI.Controllers
         private readonly IArticleRepository ArticleRepository;
         private readonly ICategoryRepository CategoryRepository;
         private readonly IMemoryCache MemoryCache;
-
         public ArticleController(IArticleRepository articleRepository, ICategoryRepository categoryRepository, IMemoryCache memoryCache)
         {
             ArticleRepository = articleRepository;
             CategoryRepository = categoryRepository;
             MemoryCache = memoryCache;
         }
-
         [HttpGet]
         public ActionResult<HotArticleVM[]> GetHotArticles()
         {

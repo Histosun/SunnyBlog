@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Nest;
+using Microsoft.Extensions.DependencyInjection;
+using SunnyBlog.Domain.Entities;
 using SunnyBlog.Infrastructure;
+using SunnyCommons.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +13,30 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BlogDbContext>(opt =>
+builder.Services.AddDbContext<BlogDbContext>(options =>
 {
     var dbconfig = builder.Configuration.GetSection("Database");
     string connStr = dbconfig.GetSection("ConnStr").Value;
     string severVersion = dbconfig.GetSection("ServerVersion").Value;
-    opt.UseMySql(connStr, new MySqlServerVersion(severVersion));
+    options.UseMySql(connStr, new MySqlServerVersion(severVersion));
 });
+builder.Services.AddIdentityCore<User>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+
+    options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
+    options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultEmailProvider;
+});
+builder.Services.AddDataProtection();
+var idBuilder = new IdentityBuilder(typeof(User), typeof(Role), builder.Services);
+idBuilder.AddEntityFrameworkStores<BlogDbContext>()
+        .AddDefaultTokenProviders()
+        .AddRoleManager<RoleManager<Role>>()
+        .AddUserManager<UserManager<User>>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "dev_policy",
@@ -28,6 +48,8 @@ builder.Services.AddCors(options =>
                                 .AllowCredentials();
                       });
 });
+builder.Services.AddAuthentication(options => options.DefaultScheme = JwtAuthenticationDefault.AuthenticationScheme)
+                .AddScheme<JwtAuthenticaionOptions, JwtAuthenticationHandler>(JwtAuthenticationDefault.AuthenticationScheme, options => {});
 ModuleInitializer.Initialize(builder.Services);
 
 var app = builder.Build();

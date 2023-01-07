@@ -2,11 +2,11 @@
 using SunnyBlog.Domain;
 using SunnyBlog.Domain.Entities;
 
-namespace SunnyBlog.Infrastructure
+namespace SunnyBlog.Infrastructure.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        DbSet<Category> Categories;
+        private readonly DbSet<Category> Categories;
 
         public CategoryRepository(BlogDbContext blogDbContext)
         {
@@ -19,7 +19,7 @@ namespace SunnyBlog.Infrastructure
 
         public Category[] GetCategories()
         {
-            throw new NotImplementedException();
+            return Categories.ToArray();
         }
     }
 }
