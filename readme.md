@@ -13,7 +13,7 @@ This is a front-end and back-end separation project.
 
 The front end uses React + TypeScript + Ant design.
 
-The backend uses ASP.NET core + C# + WebAPI
+The backend uses ASP.NET core, Web Api, C#, ef core.
 
 ## Install
 
