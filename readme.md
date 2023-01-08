@@ -39,8 +39,8 @@ $ yarn run dev
 
 in your terminal.
 
-After the server runs. Open http://localhost:3000/ in your browser.
+After the server runs. Open http://localhost:3000/ with your browser.
 
 ### Back end
 
-The back end uses .net 6.0.
+The back end uses .net 6.0. Open ./blog-bakend/blog.sln with visual studio(2022 recomended).
