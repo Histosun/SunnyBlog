@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace SunnyCommons.Auth
+namespace SunnyCommons.Auth.Authentication
 {
     public class JwtAuthenticaionOptions : AuthenticationSchemeOptions
     {

@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
-namespace SunnyCommons.Auth
+namespace SunnyCommons.Auth.Authentication
 {
     public class JwtAuthenticationHandler : AuthenticationHandler<JwtAuthenticaionOptions>
     {
@@ -22,9 +22,9 @@ namespace SunnyCommons.Auth
             ClaimsPrincipal? principal = null;
             try
             {
-                Options.defaultHandler.ValidateToken(authorization, Options.TokenValidationParameters,out token);
+                principal = Options.defaultHandler.ValidateToken(authorization, Options.TokenValidationParameters, out token);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return AuthenticateResult.Fail(e.Message);
             }

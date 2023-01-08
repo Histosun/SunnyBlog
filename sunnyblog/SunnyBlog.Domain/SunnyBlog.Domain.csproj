@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SunnyCommons.Auth\SunnyCommons.Auth.csproj" />
     <ProjectReference Include="..\SunnyCommons.Domain\SunnyCommons.Domain.csproj" />
   </ItemGroup>
 

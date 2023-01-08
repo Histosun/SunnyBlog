@@ -1,4 +1,4 @@
-﻿namespace SunnyCommons.Auth
+﻿namespace SunnyCommons.Auth.Authentication
 {
     public class JwtAuthenticationDefault
     {

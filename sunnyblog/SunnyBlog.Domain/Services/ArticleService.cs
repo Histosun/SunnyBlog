@@ -1,4 +1,4 @@
-﻿namespace SunnyBlog.Domain
+﻿namespace SunnyBlog.Domain.Services
 {
     public class ArticleService
     {

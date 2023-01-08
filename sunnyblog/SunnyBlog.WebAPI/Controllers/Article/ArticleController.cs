@@ -20,6 +20,7 @@ namespace SunnyBlog.WebAPI.Controllers
             MemoryCache = memoryCache;
         }
         [HttpGet]
+        [Authorize]
         public ActionResult<HotArticleVM[]> GetHotArticles()
         {
             return ArticleRepository.GetHotArticles(e => new HotArticleVM(e.Id, e.Title, e.ViewCount));

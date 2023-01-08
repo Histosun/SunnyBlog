@@ -26,7 +26,7 @@ namespace SunnyBlog.Infrastructure.Repositories
 
         public TResult[] GetArticleList<TResult>(int pageNum, Expression<Func<Article, TResult>> selector)
         {
-            return Articles.Where(x => x.Status == 1).Skip(pageNum * 10).Take(10).Select(selector).ToArray();
+            return Articles.OrderByDescending(x => x.CreateTime).Where(x => x.Status == 1).Skip(pageNum * 10).Take(10).Select(selector).ToArray();
         }
 
         public TResult[] GetArticleListByCategory<TResult>(int pageNum, long categoryId, Expression<Func<Article, TResult>> selector)

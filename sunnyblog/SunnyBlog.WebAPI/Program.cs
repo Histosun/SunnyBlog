@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using SunnyBlog.Domain.Entities;
 using SunnyBlog.Infrastructure;
-using SunnyCommons.Auth;
+using SunnyCommons.Auth.Authentication;
+using SunnyCommons.Auth.Token;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,8 +52,20 @@ builder.Services.AddCors(options =>
                                 .AllowCredentials();
                       });
 });
+builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddAuthentication(options => options.DefaultScheme = JwtAuthenticationDefault.AuthenticationScheme)
-                .AddScheme<JwtAuthenticaionOptions, JwtAuthenticationHandler>(JwtAuthenticationDefault.AuthenticationScheme, options => {});
+                .AddScheme<JwtAuthenticaionOptions, JwtAuthenticationHandler>(JwtAuthenticationDefault.AuthenticationScheme, options => {
+                    JWTOptions jwtOpt = builder.Configuration.GetSection("JWT").Get<JWTOptions>();
+                    options.TokenValidationParameters = new()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = jwtOpt.Issuer,
+                        ValidAudience = jwtOpt.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOpt.Key))
+                    };
+                });
 ModuleInitializer.Initialize(builder.Services);
 
 var app = builder.Build();
