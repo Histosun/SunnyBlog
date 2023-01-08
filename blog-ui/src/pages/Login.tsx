@@ -1,53 +1,113 @@
-import React from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
-import axios from 'axios';
-import './Login.css'
+import {
+    GithubOutlined,
+    LockOutlined,
+    MailOutlined,
+    GoogleOutlined,
+    UserOutlined,
+    FacebookOutlined,
+} from '@ant-design/icons';
+import {
+    LoginForm,
+    ProFormCheckbox,
+    ProFormText,
+    ProConfigProvider,
+} from '@ant-design/pro-components';
+import { message, Space, Tabs } from 'antd';
+import type { CSSProperties } from 'react';
+import { useState } from 'react';
+import { Link } from "react-router-dom"
+import { login } from '../api/user';
 
-const apiRoot='localhost:5000'
+type LoginType = 'account' | 'email';
 
-const Login: React.FC = () => {
-    const onFinish = (values: any) => {
-        axios.post(`${apiRoot}/Login/LoginByUserNameAndPwd`, values)
-    };
+const iconStyles: CSSProperties = {
+    marginInlineStart: '16px',
+    color: 'rgba(0, 0, 0, 0.2)',
+    fontSize: '24px',
+    verticalAlign: 'middle',
+    cursor: 'pointer',
+};
 
-    const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
-    };
+const Login = () => {
+    const [loginType, setLoginType] = useState<LoginType>('account');
+
+    const onSubmit = async (values:any) => { 
+        login(values)
+            .then(response => {
+                console.log(response)
+            })
+    }
 
     return (
-        <div className="Login">
-            <Form
-                name="basic"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
+        <ProConfigProvider hashed={false}>
+        <div style={{ backgroundColor: 'white' }}>
+            <LoginForm
+                logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+                title="SunnyBlog"
+                subTitle="Zhaoyang's Personal Blog Project"
+                actions={
+                    <Space>
+                        Other login methods
+                        <GithubOutlined style={iconStyles} />
+                        <GoogleOutlined style={iconStyles} />
+                        <FacebookOutlined style={iconStyles} />
+                    </Space>
+                }
+                submitter={
+                    {searchConfig: { submitText: "Login"}}
+                }
+                onFinish={onSubmit}
             >
-                <Form.Item
-                    label="Username"
+            {(
+            <>
+                <ProFormText
                     name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
-                >
-                    <Input />
-                </Form.Item>
-
-                <Form.Item
-                    label="Password"
+                    fieldProps={{
+                    size: 'large',
+                    prefix: <UserOutlined className={'prefixIcon'} />,
+                    }}
+                    placeholder={'username'}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Username cannot be empty!',
+                        },
+                    ]}
+                />
+                <ProFormText.Password
                     name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
-                >
-                    <Input.Password />
-                </Form.Item>
-
-                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+                    fieldProps={{
+                    size: 'large',
+                    prefix: <LockOutlined className={'prefixIcon'} />,
+                    }}
+                    placeholder={'password'}
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Password cannot be empty！',
+                        },
+                    ]}
+                />
+            </>
+            )}
+                <div
+                    style={{
+                    marginBlockEnd: 24,
+                    }}>
+                    <ProFormCheckbox noStyle name="autoLogin">
+                        remember me
+                    </ProFormCheckbox>
+                    <Link to="/SignUp"
+                        style={{
+                            float: 'right',
+                        }}
+                    >
+                        forget password
+                    </Link>
+                </div>
+            </LoginForm>
         </div>
+        </ProConfigProvider>
     );
 };
 

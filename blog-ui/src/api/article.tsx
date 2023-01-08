@@ -5,7 +5,7 @@ export const hotArticleList = ()=>{
         url: `/Article/GetHotArticles`,
         method: "get",
         headers: {
-            isToker: false
+            isToken: false
         }
     })
 }
@@ -15,7 +15,7 @@ export const getArticleList = (pageNum: number)=>{
         url: `/Article/GetArticleList?pageNum=${pageNum}`,
         method: "get",
         headers: {
-            isToker: false
+            isToken: false
         }
     })
 }
@@ -25,7 +25,7 @@ export const getArticleDetail = (articleId: string)=>{
         url: `/Article/GetArticleDetail/${articleId}`,
         method: "get",
         headers: {
-            isToker: false
+            isToken: false
         }
     })
 }

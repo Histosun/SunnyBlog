@@ -1,6 +1,8 @@
-import { RouteObject } from "react-router-dom";
+import { RouteObject, Navigate } from "react-router-dom";
 import ArticleHome from "../pages/article/ArticleHome";
 import ArticleDetail from "../pages/article/ArticleDetail";
+import Login from "../pages/Login";
+
 export default [
     {
         path: '/',
@@ -14,5 +16,8 @@ export default [
         path: '/Article/:id',
         element: <ArticleDetail/>
     },
-
+    {
+        path: '/Login',
+        element: <Login/>
+    }
 ] as RouteObject[]
