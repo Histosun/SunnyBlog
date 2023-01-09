@@ -53,5 +53,7 @@ Set SunnyBlog.WebAPI as setup item. Then run it.
 
 ![Home page demo](./static/HomePage.png)
 
+![Article detail page](./static/ArticleDetail.png)
+
 ### Article Detail
 
