@@ -15,7 +15,6 @@ const ArticleList: React.FC = () => {
         setArticleList(response.data);
       })
       .catch(reason => {
-        console.log(reason)
         messageApi.open({
           type: 'error',
           content: "reason",

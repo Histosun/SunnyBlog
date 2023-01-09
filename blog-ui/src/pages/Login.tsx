@@ -12,11 +12,12 @@ import {
     ProFormText,
     ProConfigProvider,
 } from '@ant-design/pro-components';
-import { message, Space, Tabs } from 'antd';
-import type { CSSProperties } from 'react';
+import { Space } from 'antd';
+import { CSSProperties, useContext } from 'react';
 import { useState } from 'react';
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { login } from '../api/user';
+import AuthContext from '../context/AuthContext';
 
 type LoginType = 'account' | 'email';
 
@@ -30,11 +31,16 @@ const iconStyles: CSSProperties = {
 
 const Login = () => {
     const [loginType, setLoginType] = useState<LoginType>('account');
+    const navigate = useNavigate();
+
+    const { dispatch } = useContext(AuthContext);
 
     const onSubmit = async (values:any) => { 
         login(values)
             .then(response => {
-                console.log(response)
+                // console.log(response.data)
+                dispatch({ type: 'login', payload: response.data });
+                navigate("/Home");
             })
     }
 

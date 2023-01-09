@@ -18,8 +18,8 @@ namespace SunnyCommons.Auth.Authentication
             string authorization = Request.Headers["Authorization"].ToString();
             if (string.IsNullOrEmpty(authorization))
                 return AuthenticateResult.Fail("");
-            SecurityToken? token = null;
-            ClaimsPrincipal? principal = null;
+            SecurityToken? token;
+            ClaimsPrincipal? principal;
             try
             {
                 principal = Options.defaultHandler.ValidateToken(authorization, Options.TokenValidationParameters, out token);

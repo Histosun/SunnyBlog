@@ -1,4 +1,6 @@
+import { AxiosResponse } from 'axios'
 import request from '../utils/request'
+import { User } from '../context/AuthContext'
 
 interface LoginRequest{
     username: string,
@@ -6,15 +8,12 @@ interface LoginRequest{
 };
 
 export const login = (loginRequest: LoginRequest)=>{
-    return request({
+    return request<any, AxiosResponse<User , any>, LoginRequest>({
         url: `/Login/LoginByUsernamePassword`,
         method: "post",
         headers: {
             isToken: false
         },
-        data: {
-            'username': loginRequest.username,
-            'password': loginRequest.password
-        }
+        data: loginRequest
     })
 }

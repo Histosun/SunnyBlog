@@ -13,9 +13,9 @@ const HotArticleItem: React.FC<HotArticle> = ({id, title, viewCount }: HotArticl
         <p>
             <Link to={`/Article/${id}`}>
                 {title}
-                <div style={{ marginLeft: 0 }}>
+                <span style={{flex: 'left'}}>
                     <EyeOutlined/>{viewCount}
-                </div>
+                </span>
             </Link>
         </p>
     );

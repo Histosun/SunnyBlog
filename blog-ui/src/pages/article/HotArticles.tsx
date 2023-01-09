@@ -12,7 +12,6 @@ const HotArticles: React.FC = () => {
 
     hotArticleList()
       .then(response => {
-        console.log(response.data)
         setHotArticles(response.data);
       })
       .catch(reason => {

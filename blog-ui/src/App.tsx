@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { ConfigProvider } from 'antd';
 
 import Home from "./pages/Home";
+import { AuthProvider } from './context/AuthProvider';
 
 const App: React.FC = () => {
-
   return (
-    <Home/>
+    <AuthProvider>
+      <Home/>
+    </AuthProvider>
   );
 };
 

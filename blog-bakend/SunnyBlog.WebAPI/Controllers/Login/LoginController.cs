@@ -22,16 +22,17 @@ namespace SunnyBlog.WebAPI.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult<string?>> LoginByUsernamePasswordAsync(LoginByUsernamePasswordRequest request)
+        public async Task<ActionResult<LoginResult>> LoginByUsernamePasswordAsync(LoginByUserNameAndPwdRequest request)
         {
             (var result, var token)=await idService.LoginByUserNameAndPwdAsync(request.UserName, request.Password);
             if (result.Succeeded)
-                return token;
+                return new LoginResult(request.UserName, token);
             return StatusCode((int)HttpStatusCode.BadRequest, "login failed");
         }
+
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult<string?>> SignUpByUsernamePasswordAsync(LoginByUsernamePasswordRequest request)
+        public async Task<ActionResult<string?>> SignUpByUsernamePasswordAsync(LoginByUserNameAndPwdRequest request)
         {
             var result = await idService.SignUpByUserNameAndPwdAsync(request.UserName, request.Password);
             if (result.Succeeded)
