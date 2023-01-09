@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
 
 import Home from "./pages/Home";
 

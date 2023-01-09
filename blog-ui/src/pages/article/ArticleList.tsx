@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import ArticleCard, { ArticleCardProps } from '../../components/ArticleCard'
+import { message } from 'antd';
+import ArticleCard, { ArticleCardProps } from '../../components/article/ArticleCard'
 import { getArticleList } from '../../api/article';
 
 const ArticleList: React.FC = () => {
   const [articleList, setArticleList] = useState([] as ArticleCardProps[]);
+  const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
     if (articleList.length != 0) return;
@@ -13,12 +15,17 @@ const ArticleList: React.FC = () => {
         setArticleList(response.data);
       })
       .catch(reason => {
-        alert(reason)
+        console.log(reason)
+        messageApi.open({
+          type: 'error',
+          content: "reason",
+        });
       });
   })
 
   return (
     <div>
+      {contextHolder}
       {articleList.map(it => <ArticleCard key={it.id} {...it}></ArticleCard>)}
     </div>
   );

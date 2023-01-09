@@ -11,7 +11,7 @@
 
 This is a front-end and back-end separation project.
 
-The front end uses React + TypeScript + Ant design.
+The front end uses React, TypeScript and Ant design.
 
 The backend uses ASP.NET core, Web Api, C#, ef core.
 
@@ -44,3 +44,14 @@ After the server runs. Open http://localhost:3000/ with your browser.
 ### Back end
 
 The back end uses .net 6.0. Open [./blog-bakend/blog.sln](./blog-bakend/blog.sln) with visual studio(2022 recomended).
+
+Set SunnyBlog.WebAPI as setup item. Then run it.
+
+## Demo
+
+### Home page
+
+![Home page demo](图片地址)
+
+### Article Detail
+

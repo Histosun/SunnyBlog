@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Row, theme } from 'antd';
 import ArticleList from './ArticleList';
+import HotArticles from './HotArticles';
 
 const ArticleHome: React.FC = () => {
   const {
@@ -16,7 +17,7 @@ const ArticleHome: React.FC = () => {
           <ArticleList/>
         </Col>
         <Col className="gutter-row" flex={3}>
-          <div style={style}>col-6</div>
+          <HotArticles></HotArticles>
         </Col>
       </Row>
     </div>
