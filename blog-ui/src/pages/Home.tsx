@@ -14,6 +14,11 @@ const Home: React.FC = () => {
   } = theme.useToken();
   const elements = useRoutes(routes)
 
+  var result = 0;
+  for(var i = 0; i<=14;i+=3) result++;
+  if(i>13) result += 100;
+  console.log(result)
+
   // const {user}=useUser();
   // console.log(user)
 
